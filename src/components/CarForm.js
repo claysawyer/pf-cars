@@ -1,27 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeName, changeCost, addCar } from "../store";
 
-function CarForm() {
+const CarForm = () => {
   const dispatch = useDispatch();
-  const { name, cost } = useSelector((state) => {
-    return {
-      name: state.form.name,
-      cost: state.form.cost,
-    };
-  });
 
+  // Extracting name and cost from the form state
+  const { name, cost } = useSelector((state) => state.form);
+
+  // Event handler for name change
   const handleNameChange = (event) => {
-    dispatch(changeName(event.target.value));
+    const newName = event.target.value;
+    dispatch(changeName(newName));
   };
 
+  // Event handler for cost change
   const handleCostChange = (event) => {
-    const carCost = parseInt(event.target.value) || 0;
-    dispatch(changeCost(carCost));
+    const newCost = parseInt(event.target.value) || 0;
+    dispatch(changeCost(newCost));
   };
 
+  // Event handler for form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-
     dispatch(addCar({ name, cost }));
   };
 
@@ -54,6 +54,6 @@ function CarForm() {
       </form>
     </div>
   );
-}
+};
 
 export default CarForm;

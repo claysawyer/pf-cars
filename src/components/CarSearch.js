@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeSearchTerm } from "../store";
 
-function CarSearch() {
+const CarSearch = () => {
   const dispatch = useDispatch();
-  const searchTerm = useSelector((state) => {
-    return state.cars.searchTerm;
-  });
 
+  // Extracting the search term from the cars state
+  const searchTerm = useSelector((state) => state.cars.searchTerm);
+
+  // Event handler for search term change
   const handleSearchTermChange = (event) => {
-    dispatch(changeSearchTerm(event.target.value));
+    const newSearchTerm = event.target.value;
+    dispatch(changeSearchTerm(newSearchTerm));
   };
 
   return (
@@ -24,6 +26,6 @@ function CarSearch() {
       </div>
     </div>
   );
-}
+};
 
 export default CarSearch;
